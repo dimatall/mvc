@@ -1,0 +1,8 @@
+<IfModule mod_rewrite.c>
+    #Start the rewrite engine
+    RewriteEngine on
+    #If requested thing is not a file or directory , then rewrite
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php?/$1 [L]
+</IfModule>
