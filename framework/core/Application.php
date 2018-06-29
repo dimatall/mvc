@@ -87,9 +87,6 @@ class Application
     {
         list($controllerId, $method) = UrlHelper::parseRoute($route);
 
-        if ($controllerId) {
-
-        }
         $controllerName = $controllerId ?: $controllerId = self::$config['defaultController'];
         $method = $method ?: self::$config['defaultMethod'];
 

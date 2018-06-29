@@ -10,7 +10,7 @@ class PostgresConnection implements ConnectionInterface
     {
         $config = Application::getConfig('db');
 
-        $conn = new \PDO("pgsql:host={$config['host']};dbname={$config['name']}", $config['username'], $config['password']);
+        $conn = new \PDO("pgsql:host={$config['host']};dbname={$config['name']};port={$config['port']};charset=utf8", $config['username'], $config['password']);
         $conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         return $conn;
     }

@@ -10,7 +10,7 @@ class MysqlConnection implements ConnectionInterface
     {
         $config = Application::getConfig('db');
 
-        $conn = new \PDO("mysql:host={$config['host']};dbname={$config['name']}", $config['username'], $config['password']);
+        $conn = new \PDO("mysql:host={$config['host']};dbname={$config['name']};port={$config['port']};charset=utf8", $config['username'], $config['password']);
         $conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         return $conn;
     }

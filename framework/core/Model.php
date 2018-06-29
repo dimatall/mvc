@@ -62,7 +62,9 @@ class Model
         unset($attributes['id']);
 
         $fields = implode(',', array_keys($attributes));
-        $values = implode("','", array_values($attributes));
+
+        $serialized = $this->serialize(array_values($attributes));
+        $values = implode("','", $serialized);
 
         $sql = "INSERT INTO `{$tableName}` ({$fields}) VALUES ('{$values}')";
 
@@ -111,6 +113,7 @@ class Model
         $sql = "SELECT * FROM `{$tableName}`";
 
         foreach ($params as $field => $val) {
+            $val = htmlspecialchars(addslashes($val));
             $condition[] = "`{$field}` = '{$val}'";
         }
 
@@ -121,6 +124,14 @@ class Model
         $stm = $db->prepare($sql);
         $stm->execute();
         return $stm;
+    }
+
+    public function serialize($array)
+    {
+        foreach ($array as $key => $val) {
+            $array[$key] = htmlspecialchars(addslashes($val));
+        }
+        return $array;
     }
 
     public static function getTableName()
